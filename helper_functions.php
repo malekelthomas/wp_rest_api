@@ -18,6 +18,8 @@ function update($table_name, $title, $description, $breadcrumb_title){ //updates
 
 function check_header($header){
 
+    
+
     $should_be = 
     [
         'Page on Site',
@@ -25,13 +27,20 @@ function check_header($header){
         'URL',
         'Meta_Title',
         '# of Characters',
-        'Alt Titles (≤ 60 characters)',
+        'Alt Titles (sub 60 characters)',
         'Meta_Description',
         'Complete'
     ];
 
-    if(array_keys($header) == $should_be){
-        return true;
+    if(count($header) == 8){
+        foreach($should_be as $val){
+            if(!in_array($val,$header, true)){
+                return $val;
+            }
+            else{
+                return true;
+            }
+        }
     }
     else{
         return false;
